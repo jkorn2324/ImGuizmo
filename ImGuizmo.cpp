@@ -2675,7 +2675,7 @@ namespace IMGUIZMO_NAMESPACE
       }
    }
 
-   void ViewManipulate(float* view, float length, ImVec2 position, ImVec2 size, ImU32 backgroundColor)
+   void ViewManipulate(float* view, float length, const ImVec2& position, const ImVec2& size, unsigned int backgroundColor)
    {
       static bool isDraging = false;
       static bool isClicking = false;
