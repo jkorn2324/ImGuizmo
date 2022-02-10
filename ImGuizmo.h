@@ -115,6 +115,10 @@ void EditTransform(const Camera& camera, matrix_t& matrix)
 #define IMGUIZMO_NAMESPACE ImGuizmo
 #endif
 
+struct ImDrawList;
+struct ImGuiContext;
+struct ImVec2;
+
 namespace IMGUIZMO_NAMESPACE
 {
    // call inside your own window and before Manipulate() in order to draw gizmo to that window.
@@ -208,7 +212,7 @@ namespace IMGUIZMO_NAMESPACE
    // It seems to be a defensive patent in the US. I don't think it will bring troubles using it as
    // other software are using the same mechanics. But just in case, you are now warned!
    //
-   IMGUI_API void ViewManipulate(float* view, float length, ImVec2 position, ImVec2 size, ImU32 backgroundColor);
+   IMGUI_API void ViewManipulate(float* view, float length, const ImVec2& position, const ImVec2& size, unsigned int backgroundColor);
 
    IMGUI_API void SetID(int id);
 
