@@ -1,5 +1,5 @@
 // https://github.com/CedricGuillemet/ImGuizmo
-// v 1.84 WIP
+// v 1.89 WIP
 //
 // The MIT License(MIT)
 //
@@ -115,10 +115,6 @@ void EditTransform(const Camera& camera, matrix_t& matrix)
 #define IMGUIZMO_NAMESPACE ImGuizmo
 #endif
 
-struct ImDrawList;
-struct ImGuiContext;
-struct ImVec2;
-
 namespace IMGUIZMO_NAMESPACE
 {
    // call inside your own window and before Manipulate() in order to draw gizmo to that window.
@@ -139,6 +135,9 @@ namespace IMGUIZMO_NAMESPACE
 
    // return true if mouse IsOver or if the gizmo is in moving state
    IMGUI_API bool IsUsing();
+
+   // return true if any gizmo is in moving state
+   IMGUI_API bool IsUsingAny();
 
    // enable/disable the gizmo. Stay in the state until next call to Enable.
    // gizmo is rendered with gray half transparent color when disabled
@@ -212,7 +211,10 @@ namespace IMGUIZMO_NAMESPACE
    // It seems to be a defensive patent in the US. I don't think it will bring troubles using it as
    // other software are using the same mechanics. But just in case, you are now warned!
    //
-   IMGUI_API void ViewManipulate(float* view, float length, const ImVec2& position, const ImVec2& size, unsigned int backgroundColor);
+   IMGUI_API void ViewManipulate(float* view, float length, ImVec2 position, ImVec2 size, ImU32 backgroundColor);
+
+   // use this version if you did not call Manipulate before and you are just using ViewManipulate
+   IMGUI_API void ViewManipulate(float* view, const float* projection, OPERATION operation, MODE mode, float* matrix, float length, ImVec2 position, ImVec2 size, ImU32 backgroundColor);
 
    IMGUI_API void SetID(int id);
 
@@ -224,4 +226,47 @@ namespace IMGUIZMO_NAMESPACE
    // When true (default), the guizmo axis flip for better visibility
    // When false, they always stay along the positive world/local axis
    IMGUI_API void AllowAxisFlip(bool value);
+
+   // Configure the limit where axis are hidden
+   IMGUI_API void SetAxisLimit(float value);
+   // Configure the limit where planes are hiden
+   IMGUI_API void SetPlaneLimit(float value);
+
+   enum COLOR
+   {
+      DIRECTION_X,      // directionColor[0]
+      DIRECTION_Y,      // directionColor[1]
+      DIRECTION_Z,      // directionColor[2]
+      PLANE_X,          // planeColor[0]
+      PLANE_Y,          // planeColor[1]
+      PLANE_Z,          // planeColor[2]
+      SELECTION,        // selectionColor
+      INACTIVE,         // inactiveColor
+      TRANSLATION_LINE, // translationLineColor
+      SCALE_LINE,
+      ROTATION_USING_BORDER,
+      ROTATION_USING_FILL,
+      HATCHED_AXIS_LINES,
+      TEXT,
+      TEXT_SHADOW,
+      COUNT
+   };
+
+   struct Style
+   {
+      IMGUI_API Style();
+
+      float TranslationLineThickness;   // Thickness of lines for translation gizmo
+      float TranslationLineArrowSize;   // Size of arrow at the end of lines for translation gizmo
+      float RotationLineThickness;      // Thickness of lines for rotation gizmo
+      float RotationOuterLineThickness; // Thickness of line surrounding the rotation gizmo
+      float ScaleLineThickness;         // Thickness of lines for scale gizmo
+      float ScaleLineCircleSize;        // Size of circle at the end of lines for scale gizmo
+      float HatchedAxisLineThickness;   // Thickness of hatched axis lines
+      float CenterCircleSize;           // Size of circle at the center of the translate/scale gizmo
+
+      ImVec4 Colors[COLOR::COUNT];
+   };
+
+   IMGUI_API Style& GetStyle();
 }
