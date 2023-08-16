@@ -1,2 +1,9 @@
 build/
 .*/
+x64/
+
+# Ignore VCS Files
+.vs/
+*.vcxproj.user
+*.sln
+*.ini
