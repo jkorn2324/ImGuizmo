@@ -51,6 +51,14 @@ namespace IMGUIZMO_NAMESPACE
    // scale a bit so translate axis do not touch when in universal
    const float rotationDisplayFactor = 1.2f;
 
+#if USE_IMGUI_API
+
+   // The imguizmo vec4.
+   constexpr ImGuizmoVec4::ImGuizmoVec4(const ImVec4& vec)
+      : x(vec.x), y(vec.y), z(vec.z), w(vec.w) { }
+
+#endif
+
    static OPERATION operator&(OPERATION lhs, OPERATION rhs)
    {
      return static_cast<OPERATION>(static_cast<int>(lhs) & static_cast<int>(rhs));
@@ -792,7 +800,8 @@ namespace IMGUIZMO_NAMESPACE
    static ImU32 GetColorU32(int idx)
    {
       IM_ASSERT(idx < COLOR::COUNT);
-      return ImGui::ColorConvertFloat4ToU32(gContext.mStyle.Colors[idx]);
+      ImGuizmoVec4 vc = gContext.mStyle.Colors[idx];
+      return ImGui::ColorConvertFloat4ToU32(*reinterpret_cast<ImVec4*>(&vc));
    }
 
    static ImVec2 worldToPos(const vec_t& worldPos, const matrix_t& mat, ImVec2 position = ImVec2(gContext.mX, gContext.mY), ImVec2 size = ImVec2(gContext.mWidth, gContext.mHeight))

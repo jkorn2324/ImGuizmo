@@ -104,9 +104,21 @@ void EditTransform(const Camera& camera, matrix_t& matrix)
 #endif
 #pragma once
 
+struct ImVec2;
+struct ImVec4;
+struct ImGuiContext;
+struct ImDrawList;
+
 #ifdef USE_IMGUI_API
+
 #include "imconfig.h"
+
+#else
+
+typedef unsigned int ImU32;
+
 #endif
+
 #ifndef IMGUI_API
 #define IMGUI_API
 #endif
@@ -115,8 +127,25 @@ void EditTransform(const Camera& camera, matrix_t& matrix)
 #define IMGUIZMO_NAMESPACE ImGuizmo
 #endif
 
+
 namespace IMGUIZMO_NAMESPACE
 {
+
+   // Representation of a vec4 for ImGuizmo.
+   struct ImGuizmoVec4
+   {
+      float x; float y; float z; float w;
+
+#ifdef IMGUI_API
+      constexpr ImGuizmoVec4(const ImVec4& v);
+#endif
+
+      constexpr ImGuizmoVec4() :
+         x(0.0f), y(0.0f), z(0.0f), w(0.0f) { };
+      constexpr ImGuizmoVec4(float inX, float inY, float inZ, float inW) :
+         x(inX), y(inY), z(inZ), w(inW) { }
+   };
+
    // call inside your own window and before Manipulate() in order to draw gizmo to that window.
    // Or pass a specific ImDrawList to draw to (e.g. ImGui::GetForegroundDrawList()).
    IMGUI_API void SetDrawlist(ImDrawList* drawlist = nullptr);
@@ -172,20 +201,20 @@ namespace IMGUIZMO_NAMESPACE
    // translation is applied in world space
    enum OPERATION
    {
-      TRANSLATE_X      = (1u << 0),
-      TRANSLATE_Y      = (1u << 1),
-      TRANSLATE_Z      = (1u << 2),
-      ROTATE_X         = (1u << 3),
-      ROTATE_Y         = (1u << 4),
-      ROTATE_Z         = (1u << 5),
-      ROTATE_SCREEN    = (1u << 6),
-      SCALE_X          = (1u << 7),
-      SCALE_Y          = (1u << 8),
-      SCALE_Z          = (1u << 9),
-      BOUNDS           = (1u << 10),
-      SCALE_XU         = (1u << 11),
-      SCALE_YU         = (1u << 12),
-      SCALE_ZU         = (1u << 13),
+      TRANSLATE_X = (1u << 0),
+      TRANSLATE_Y = (1u << 1),
+      TRANSLATE_Z = (1u << 2),
+      ROTATE_X = (1u << 3),
+      ROTATE_Y = (1u << 4),
+      ROTATE_Z = (1u << 5),
+      ROTATE_SCREEN = (1u << 6),
+      SCALE_X = (1u << 7),
+      SCALE_Y = (1u << 8),
+      SCALE_Z = (1u << 9),
+      BOUNDS = (1u << 10),
+      SCALE_XU = (1u << 11),
+      SCALE_YU = (1u << 12),
+      SCALE_ZU = (1u << 13),
 
       TRANSLATE = TRANSLATE_X | TRANSLATE_Y | TRANSLATE_Z,
       ROTATE = ROTATE_X | ROTATE_Y | ROTATE_Z | ROTATE_SCREEN,
@@ -196,7 +225,7 @@ namespace IMGUIZMO_NAMESPACE
 
    inline OPERATION operator|(OPERATION lhs, OPERATION rhs)
    {
-     return static_cast<OPERATION>(static_cast<int>(lhs) | static_cast<int>(rhs));
+      return static_cast<OPERATION>(static_cast<int>(lhs) | static_cast<int>(rhs));
    }
 
    enum MODE
@@ -265,7 +294,7 @@ namespace IMGUIZMO_NAMESPACE
       float HatchedAxisLineThickness;   // Thickness of hatched axis lines
       float CenterCircleSize;           // Size of circle at the center of the translate/scale gizmo
 
-      ImVec4 Colors[COLOR::COUNT];
+      ImGuizmoVec4 Colors[COLOR::COUNT];
    };
 
    IMGUI_API Style& GetStyle();
