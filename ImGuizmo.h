@@ -136,7 +136,7 @@ namespace IMGUIZMO_NAMESPACE
    {
       float x; float y; float z; float w;
 
-#ifdef IMGUI_API
+#ifdef USE_IMGUI_API
       constexpr ImGuizmoVec4(const ImVec4& v);
 #endif
 

@@ -655,21 +655,21 @@ namespace IMGUIZMO_NAMESPACE
       CenterCircleSize           = 6.0f;
 
       // initialize default colors
-      Colors[DIRECTION_X]           = ImVec4(0.666f, 0.000f, 0.000f, 1.000f);
-      Colors[DIRECTION_Y]           = ImVec4(0.000f, 0.666f, 0.000f, 1.000f);
-      Colors[DIRECTION_Z]           = ImVec4(0.000f, 0.000f, 0.666f, 1.000f);
-      Colors[PLANE_X]               = ImVec4(0.666f, 0.000f, 0.000f, 0.380f);
-      Colors[PLANE_Y]               = ImVec4(0.000f, 0.666f, 0.000f, 0.380f);
-      Colors[PLANE_Z]               = ImVec4(0.000f, 0.000f, 0.666f, 0.380f);
-      Colors[SELECTION]             = ImVec4(1.000f, 0.500f, 0.062f, 0.541f);
-      Colors[INACTIVE]              = ImVec4(0.600f, 0.600f, 0.600f, 0.600f);
-      Colors[TRANSLATION_LINE]      = ImVec4(0.666f, 0.666f, 0.666f, 0.666f);
-      Colors[SCALE_LINE]            = ImVec4(0.250f, 0.250f, 0.250f, 1.000f);
-      Colors[ROTATION_USING_BORDER] = ImVec4(1.000f, 0.500f, 0.062f, 1.000f);
-      Colors[ROTATION_USING_FILL]   = ImVec4(1.000f, 0.500f, 0.062f, 0.500f);
-      Colors[HATCHED_AXIS_LINES]    = ImVec4(0.000f, 0.000f, 0.000f, 0.500f);
-      Colors[TEXT]                  = ImVec4(1.000f, 1.000f, 1.000f, 1.000f);
-      Colors[TEXT_SHADOW]           = ImVec4(0.000f, 0.000f, 0.000f, 1.000f);
+      Colors[DIRECTION_X]           = ImGuizmoVec4(0.666f, 0.000f, 0.000f, 1.000f);
+      Colors[DIRECTION_Y]           = ImGuizmoVec4(0.000f, 0.666f, 0.000f, 1.000f);
+      Colors[DIRECTION_Z]           = ImGuizmoVec4(0.000f, 0.000f, 0.666f, 1.000f);
+      Colors[PLANE_X]               = ImGuizmoVec4(0.666f, 0.000f, 0.000f, 0.380f);
+      Colors[PLANE_Y]               = ImGuizmoVec4(0.000f, 0.666f, 0.000f, 0.380f);
+      Colors[PLANE_Z]               = ImGuizmoVec4(0.000f, 0.000f, 0.666f, 0.380f);
+      Colors[SELECTION]             = ImGuizmoVec4(1.000f, 0.500f, 0.062f, 0.541f);
+      Colors[INACTIVE]              = ImGuizmoVec4(0.600f, 0.600f, 0.600f, 0.600f);
+      Colors[TRANSLATION_LINE]      = ImGuizmoVec4(0.666f, 0.666f, 0.666f, 0.666f);
+      Colors[SCALE_LINE]            = ImGuizmoVec4(0.250f, 0.250f, 0.250f, 1.000f);
+      Colors[ROTATION_USING_BORDER] = ImGuizmoVec4(1.000f, 0.500f, 0.062f, 1.000f);
+      Colors[ROTATION_USING_FILL]   = ImGuizmoVec4(1.000f, 0.500f, 0.062f, 0.500f);
+      Colors[HATCHED_AXIS_LINES]    = ImGuizmoVec4(0.000f, 0.000f, 0.000f, 0.500f);
+      Colors[TEXT]                  = ImGuizmoVec4(1.000f, 1.000f, 1.000f, 1.000f);
+      Colors[TEXT_SHADOW]           = ImGuizmoVec4(0.000f, 0.000f, 0.000f, 1.000f);
    }
 
    struct Context
